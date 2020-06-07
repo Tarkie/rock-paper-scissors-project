@@ -5,46 +5,88 @@
     <meta charset="UTF-8"/>
 </head>
 <body>
+    <main>
+            <h1>Rock, paper, scissors.</h1>
+            <p>Choose your weapon:</p>
+                <div class="buttons">
+                    <div class="rockButton">
+                    <button class="rock">ROCK</button>
+                    </div>
+                    <div class="paperButton">
+                    <button class="paper">PAPER</button>
+                    </div>
+                    <div class="scissorsButton">
+                    <button class="scissors">SCISSORS</button>
+                    </div>
+                </div>
+                <div class="results">
+                </div>
+
+        <div class="score">
+            <p>Score</p>
+            <div class="player-score">0</div>
+            :
+            <div class="computer-score">0</div>
+        </div>
+    </main>
     <script>
-            let RPS = ["rock", "raper", "scissors"];
+            let RPS = ["rock", "paper", "scissors"];
 
             let playerScore = 0;
             let computerScore = 0;
+            let round = 1;
 
             function computerPlay() {
             return RPS[Math.floor(Math.random() * 3)];
             }
 
+            let playerChoice;
+
+        function startGame() {
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach((button) => {
+                button.addEventListener('click', (e) => {
+                    playerChoice = (button.class);
+                });
+            });
+        };
+
+            let playerSelection = playerChoice;
+            let computerSelection = computerPlay();
+
             function playRound(playerSelection, computerSelection) {
-                let playerSelection = prompt("Rock, paper, scissors?");
+                playerScoreDiv = document.getElementsByClassName("player-score");
+                computerScoreDiv = document.getElementsByClassName("computer-score");
+                let playerScore;
+                let computerScore;
+                playerScoreDiv.textContent = playerScore;
+                computerScoreDiv.textContent = computerScore;
 
-                let computerSelection = computerPlay();
-
-                if (playerSelection() === rock && computerSelection() === scissors) {
+            if (playerSelection === 'rock' && computerSelection === 'scissors') {
                     playerScore++;
                 return "You Win! Rock beats paper";
 
-            } else if (playerSelection() === rock && computerSelection() === paper) {
+            } else if (playerSelection === 'rock' && computerSelection === 'paper') {
                 computerScore++;
                 return "You Lose! Paper beats rock";
 
-            } else if (playerSelection() === paper && computerSelection() === rock) {
+            } else if (playerSelection === 'paper' && computerSelection === 'rock') {
                 playerScore++;
                 return "You Win! Paper beats rock";
 
-            } else if (playerSelection() === paper && computerSelection() === scissors) {
+            } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
                 computerScore++;
                 return "You Lose! Scissors beats rock";
 
-            } else if (playerSelection() === scissors && computerSelection() === rock) {
+            } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
                 computerScore++;
                 return "You Lose! Rock beats scissors";
 
-            } else if (playerSelection() === scissors && computerSelection() === paper) {
+            } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
                 playerScore++;
                 return "You Win! Scissors beats paper";
 
-            } else if (playerSelection() === computerSelection()) {
+            } else if (playerSelection === computerSelection) {
                 return "It's a tie!";
 
             } else {
@@ -52,19 +94,20 @@
             }
         }
 
+        const results = document.querySelector('.results');
+        results.textContent = game(round);
+
         function game(round) {
-            for (let round = 0; round < 5; round++) {
-                console.log(playRound(playerSelection, computerSelection));
-            }
+            for (let round = 0; round < 5; round++) 
 
             if (playerScore > computerScore) {
-                alert("Congratulations, you win the game!");
+                return("Congratulations, you win the game!");
             } else if (playerScore < computerScore) {
-                alert("You lose!");
+                return("You lose!");
             } else {
-                alert("It's a draw!");
+                return("It's a draw!");
             }
-        }
+        };
 
     </script>
 </body>
